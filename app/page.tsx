@@ -2,12 +2,24 @@
 import React, { useState } from 'react';
 import { Search, ShoppingCart, Menu, X, Star, Eye, Heart, ChevronRight, Zap, Shield, Truck } from 'lucide-react';
 
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  originalPrice: number;
+  rating: number;
+  reviews: number;
+  image: string;
+  badge: string;
+  specs: string[];
+}
+
 const ElectronicsStore = () => {
   const [cartCount, setCartCount] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [cart, setCart] = useState([]);
-  const [showQuickView, setShowQuickView] = useState(null);
+  const [cart, setCart] = useState<Product[]>([]);
+  const [showQuickView, setShowQuickView] = useState<Product | null>(null);
 
   const categories = [
     { name: 'Smartphones', icon: '📱', count: 156 },
@@ -87,12 +99,12 @@ const ElectronicsStore = () => {
     }
   ];
 
-  const addToCart = (product) => {
+  const addToCart = (product: Product) => {
     setCart([...cart, product]);
     setCartCount(cartCount + 1);
   };
 
-  const QuickViewModal = ({ product, onClose }) => (
+  const QuickViewModal = ({ product, onClose }: { product: Product; onClose: () => void }) => (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" onClick={onClose}>
       <div className="bg-white rounded-2xl max-w-4xl w-full p-6 max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
         <div className="flex justify-between items-start mb-4">
