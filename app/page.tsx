@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react';
 import { Search, ShoppingCart, Menu, X, Star, Eye, Heart, ChevronRight, Zap, Shield, Truck } from 'lucide-react';
 
